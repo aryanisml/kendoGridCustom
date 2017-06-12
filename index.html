@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html ng-app="KendoDemos">
+
+<head>
+  <!--<base href="http://demos.telerik.com/kendo-ui/grid/angular">-->
+  <style>
+    html {
+      font-size: 14px;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+  </style>
+  <title>Component</title>
+  <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.2.607/styles/kendo.common-bootstrap.min.css" />
+  <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.2.607/styles/kendo.bootstrap.min.css" />
+  <script src="http://kendo.cdn.telerik.com/2016.2.607/js/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.9/angular.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/1.0.1/angular-moment.js"></script>
+  <script src="http://kendo.cdn.telerik.com/2016.2.607/js/kendo.all.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+
+</head>
+<style>
+  body {
+    font: 13px sans-serif;
+  }
+
+  .one {
+    background: red !important;
+  }
+
+  .two {
+    background: yellow !important;
+  }
+
+  .three {
+    background: green !important;
+  }
+
+  .four {
+    background: orange !important;
+  }
+
+  .five {
+    background: blue !important;
+  }
+
+  .top-buffer {
+    margin-top: 20px;
+  }
+
+
+  .k-grid {
+    border-color: #b3e5fc;
+    border-radius: 0px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    /*.k-grid-header .k-header
+                    {
+                        background-color: #b3e5fc;
+                        border-color:white;
+                        .k-link{
+                                background: transparent;
+                        }
+                    }
+                    tr td {
+                            border-color: #b3e5fc;
+                            border-style: solid;
+                            background: white;
+                            border-left-width:1px;
+                    }*/
+  }
+
+  .k-grid .k-grid-header .k-header {
+    background-color: #b3e5fc;
+    border-color: white;
+  }
+
+  .k-grid .k-grid-header .k-header .k-link {
+    background: transparent;
+  }
+
+  .k-grid tr td {
+    border-color: #b3e5fc;
+    border-style: solid;
+    background: white;
+    border-left-width: 1px;
+  }
+.switch {
+  background: #fff;
+  border: 1px solid #dfdfdf;
+  position: relative;
+  display: inline-block;
+  box-sizing: content-box;
+  overflow: visible;
+  width: 52px;
+  height: 30px;
+  padding: 0px;
+  margin: 0px;
+  border-radius: 20px;
+  cursor: pointer;
+  box-shadow: rgb(223, 223, 223) 0px 0px 0px 0px inset;
+  transition: 0.3s ease-out all;
+  -webkit-transition: 0.3s ease-out all;
+  top: -1px;
+}
+/*adding a wide width for larger switch text*/
+.switch.wide {
+  width:80px;
+}
+.switch small {
+  background: #fff;
+  border-radius: 100%;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  transition: 0.3s ease-out all;
+  -webkit-transition: 0.3s ease-out all;
+}
+.switch.checked {
+  background: rgb(100, 189, 99);
+  border-color: rgb(100, 189, 99);
+}
+.switch.checked small {
+  left: 22px;
+}
+/*wider switch text moves small further to the right*/
+.switch.wide.checked small {
+  left:52px;
+}
+/*styles for switch-text*/
+.switch .switch-text {
+  font-family:Arial, Helvetica, sans-serif;
+  font-size:13px;
+}
+
+.switch .off {
+  display:block;
+  position: absolute;
+  right: 10%;
+  top: 25%;
+  z-index: 0;
+  color:#A9A9A9;
+}
+
+.switch .on {
+  display:none;
+   z-index: 0;
+  color:#fff;
+  position: absolute;
+  top: 25%;
+  left: 9%;
+}
+
+.switch.checked .off {
+  display:none;
+}
+
+.switch.checked .on {
+  display:block;
+
+}
+
+.switch.disabled {
+  opacity: .50;
+  cursor: not-allowed;
+}
+</style>
+
+<body>
+  <ssv-view></ssv-view>
+</body>
+<script src="angular-ui-switch.js"></script>
+<script src="kendoGridExtended.js"></script>
+<script src="ssv-view-component.js"></script>
+</html>

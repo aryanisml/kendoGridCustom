@@ -1,0 +1,85 @@
+<script type="text/x-kendo-template" id="myTemplate">
+	<div>
+		<div>
+			<div class="col-xs-12" style="border:solid; background-color:purple; width:50px;">
+				<div ng-repeat="n in dataItem.StudyTrailId" style="margin-left:-16px;">
+					<div ng-class="{'one':$index===0 , 'two' :$index===1, 'three' :$index===2 ,'four':$index===3,'five':$index===4}" style="float:left!important; width:07.3px;">
+						&nbsp;
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</script>
+<script type="text/x-kendo-template" id="myTemplate2">
+	<div>
+		<input kendo-date-picker k-format="'dd MMM yyyy'" name="siDate" style="width:30%" ng-model="dataItem.SIDate" ng-if="dataItem.SIActual=='N' "
+		 k-on-change="$ctrl.changesSIDate(dataItem)" ng-disabled="$ctrl.disabled" />
+		<label ng-if="dataItem.SIActual=='Y'">{{dataItem.SIDate}}</label>
+	</div>
+</script>
+
+<script type="text/x-kendo-template" id="myTemplate3">
+	<div>
+		<input kendo-date-picker k-format="'dd MMM yyyy'" name="ssvDate" style="width:30%" ng-model="dataItem.SSVDate" ng-if="dataItem.SSVActual=='N' "
+		 k-on-change="$ctrl.changesSSVDate(dataItem)" ng-disabled=$ctrl.disabled />
+		<label ng-if="dataItem.SSVActual=='Y'">{{dataItem.SSVDate}}</label>
+	</div>
+</script>
+
+<script type="text/x-kendo-template" id="myTemplate4">
+	<div>
+		{{dataItem.SSU}} <span ng-if="dataItem.validDates=='N'" title="Date issue" style="color:red">*</span>
+	</div>
+</script>
+
+
+<div id="example">
+	<div>
+		<div class="container">
+			<div class="row top-buffer">
+				<div class="col-md-1">
+					Site #
+				</div>
+				<div class="col-md-2">
+					<input type="text" ng-model="$ctrl.sites" name="sites" />
+				</div>
+				<div class="col-md-2">
+					<kendo-button class="k-primary" ng-click="$ctrl.AddRows()">Update Tables</kendo-button>
+				</div>
+			</div>
+			<div class="row top-buffer">
+				<div class="col-md-12">
+					<!--<kendo-grid options="$ctrl.mainGridOptions" >
+        </kendo-grid>-->
+					<div kendo-DVDataGrid="$ctrl.mainGrid" id="mainGrid" k-options="$ctrl.mainGridOptions" class="grid-table"></div>
+				</div>
+			</div>
+			<div class="row top-buffer">
+				<div class="col-md-8">
+					<kendo-button class="k-primary" ng-click="$ctrl.CheckValidation()">import</kendo-button>
+				</div>
+				<div class="col-md-2">
+					<kendo-button class="k-primary" ng-click="$ctrl.ShowRows()" style="border:none;background:transparent;color:blue">Show Actuals</kendo-button>
+				</div>
+				<div class="col-md-2">
+					<kendo-button class="k-primary" ng-click="$ctrl.HideRows()" style="border:none;background:transparent;color:blue">Hide Actuals</kendo-button>
+
+				</div>
+			</div>
+			<div class="row top-buffer">
+				<div class="col-md-8">
+					<kendo-button class="k-primary" ng-click="$ctrl.ManualEdit()">Manual Edit</kendo-button>
+
+				</div>
+				<div class="col-md-4">
+					<form>
+						<switch id="enabled" name="enabled" ng-model="enabled" on="On" off="Off" class="green"></switch>
+						<br>
+					</form>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
