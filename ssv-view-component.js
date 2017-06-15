@@ -13,12 +13,66 @@
 		var vm = this;
 		vm.$onInit = onInit;
 		// vm.$onDestroy = onDestroy;
+		 vm.Calculation = {
+            ssvmethod: '',
+            siteCount: '',
+            firstSSV: '',
+            lastSSV: '',
+            ssvStartDate: '',
+            ssvRate: '',
+            ssvSitesPer: ''
+
+        };
+ vm.ssvSpread = function () {
+            vm.ssvSpreadShow = true;
+        };
+        vm.ssvRates = function () {
+            vm.ssvSpreadShow = false;
+        };
+        vm.siMinMax = function () {
+            vm.siMinMaxSsuShow = true;
+            vm.siRateShow = false;
+        };
+        vm.siRates = function () {
+            vm.siRateShow = true;
+            vm.siMinMaxSsuShow = false;
+        };
+        vm.siEndDate = function () {
+            vm.siRateShow = false;
+            vm.siMinMaxSsuShow = false;
+        };
+		   vm.ssvCalculate = function () {
+
+            vm.initialSICalculation = true;
+            vm.Calculation.ssvmethod = vm.ssvMethod;
+            vm.Calculation.siteCount = vm.site;
+            vm.Calculation.firstSSV = vm.firstSSV;
+            vm.Calculation.lastSSV = vm.lastSSV;
+            vm.Calculation.ssvStartDate = vm.ssvStartDate;
+            vm.Calculation.ssvRate = vm.ssvRate;
+            vm.Calculation.ssvSitesPer = vm.ssvMethod != "ssvSpread" ? vm.ssvSitesPer : vm.Calculation.ssvSitesPer;
+
+            console.log(vm.Calculation);
+        };
 
 		function onInit() {
+			//vm.manualEditType=true;
+			   vm.ssvMethod = "ssvSpread";
+            vm.ssvSitesPer = "M";
+            vm.ssvSpreadShow = true;
+
+            vm.siMethod = "siMinMaxSSU";
+            vm.siSitesPer = "M";
+            vm.siMinMaxSsuShow = true;
+            vm.siRateShow = false;
+            vm.siEndDateShow = false;
+            vm.initialSSVCalculation = false;
+            vm.initialSICalculation = false;
+			vm.tempOff=true;
 			vm.disabled=true;
 			vm.Studies = [
 				{
-					StudyId: 1,
+					SiteId: 'GFR774-49-01',
 					StudyTrailId: ["1", "2", "3"],
 					StudyName: 'ABC',
 					SIDate: '10 May 2017',
@@ -30,7 +84,7 @@
 				},
 
 				{
-					StudyId: 2,
+					SiteId: 'GFR774-49-02',
 					StudyTrailId: ["1", "2"],
 					StudyName: 'BEX',
 					SIDate: '12 May 2017',
@@ -41,7 +95,7 @@
 					validDates: 'Y'
 				},
 				{
-					StudyId: 3,
+					SiteId: 'GFR774-49-03',
 					StudyTrailId: ["1"],
 					StudyName: 'CDE',
 					SIDate: '15 May 2017',
@@ -52,7 +106,7 @@
 					validDates: 'Y'
 				},
 				{
-					StudyId: 4,
+					SiteId: 'GFR774-49-04',
 					StudyTrailId: ["1", "2", "3", "4"],
 					StudyName: 'DERR',
 					SIDate: '18 May 2017',
@@ -63,7 +117,7 @@
 					validDates: 'Y'
 				},
 				{
-					StudyId: 5,
+					SiteId: 'GFR774-49-05',
 					StudyTrailId: ["1", "2", "3"],
 					StudyName: 'ERRR',
 					SIDate: '18 May 2017',
@@ -74,7 +128,7 @@
 					validDates: 'Y'
 				},
 				{
-					StudyId: 6,
+					SiteId: 6,
 					StudyTrailId: ["1", "2"],
 					StudyName: 'FRRR',
 					SIDate: '20 May 2017',
@@ -85,7 +139,7 @@
 					validDates: 'Y'
 				},
 				{
-					StudyId: 7,
+					SiteId: 7,
 					StudyTrailId: ["1", "2", "3", "4", "5"],
 					StudyName: 'FRRR',
 					SIDate: '22 May 2017',
@@ -94,19 +148,9 @@
 					SSVActual: 'N',
 					SSU: '30',
 					validDates: 'Y'
-				}, {
-					StudyId: 8,
-					StudyTrailId: ["1", "2", "3"],
-					StudyName: 'ERRR',
-					SIDate: '18 May 2017',
-					SIActual: 'N',
-					SSVDate: '15 Apr 2017',
-					SSVActual: 'Y',
-					SSU: '33',
-					validDates: 'Y'
 				},
 				{
-					StudyId: 9,
+					SiteId: 8,
 					StudyTrailId: ["1", "2"],
 					StudyName: 'FRRR',
 					SIDate: '31 May 2017',
@@ -118,34 +162,38 @@
 				},
 
 			];
+
+			// angular.element('#myChange').on('change',function(){
+				
+			// });
+
 			vm.dataSource = new kendo.data.DataSource({
 				pageSize: 50,
 				data: vm.Studies,
 				autoSync: true,
 				schema: {
 					model: {
-						id: "StudyId",
+						id: "SiteId",
 						fields: {
-							StudyId: { editable: false, nullable: true },
+							SiteId: { editable: false, nullable: true },
 							StudyName: { nullable: true },
 						}
 					}
 				}
 			});
 
-			vm.ManualEdit=function(){
-				vm.disabled=false;
-			};
+			// vm.ManualEdit=function(){
+			// 	vm.disabled=false;
+			// };
 
 			vm.mainGridOptions = {
 				//	dataSource:vm.dataSource,
 				columns: [
-					{ field: "StudyId", title: "StudyId", width: "05%" },
+					{ field: "SiteId", title: "Site ID", width: "7%" },
 					//{field:"StudyName", title:"StudyName" ,	width: "170px" },
-					{ field: "SSVDate", title: "SSV", template: kendo.template($("#myTemplate3").html()), width: "38%" },
-					{ field: "SSU", title: "SSU", template: kendo.template($("#myTemplate4").html()), width: "7%" },
-					{ field: "SIDate", title: "SI", template: kendo.template($("#myTemplate2").html()), width: "38%" }//,
-					// { field: "filters", title: "filters", template: kendo.template($("#myTemplate").html()), width: "20%" }
+					{ field: "SSVDate", title: "SSV Date", template: kendo.template($("#myTemplate3").html()), width: "12%" },
+					{ field: "SSU", title: "SSU", template: kendo.template($("#myTemplate4").html()), width: "5%" },
+					{ field: "SIDate", title: "SI Date", template: kendo.template($("#myTemplate2").html()), width: "12%" }//,
 				], sortable: true
 			};
 			$scope.$on('kendoWidgetCreated', widgetCreated_handler);
@@ -159,11 +207,17 @@
 			}
 		}
 
-
+		vm.ManualEdit=function(){
+			if(vm.manualEditType){
+				vm.disabled=false;
+			}else{
+				vm.disabled=true;
+			}	
+		};
 
 		vm.AddRows = function () {
 			//Add new rows in exisiting grid 
-
+ vm.initialSSVCalculation = true;
 			if (vm.sites === 0) {
 				alert('Enter sites');
 				// return;
@@ -185,7 +239,7 @@
 			var i = 0;
 			if (increaseSymbol) {
 				for (i = 0; i < loopNumber; i++) {
-					db.push({ StudyId: db.length + 1, StudyTrailId: ["1"], StudyName: '', SIDate: '', SIActual: 'N', SSVDate: '', SSVActual: 'N', SSU: '', validDates: 'Y' });
+					db.push({ SiteId: db.length + 1, StudyTrailId: ["1"], StudyName: '', SIDate: '', SIActual: 'N', SSVDate: '', SSVActual: 'N', SSU: '', validDates: 'Y' });
 				}
 			} else {
 				/*
