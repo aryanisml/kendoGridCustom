@@ -87,88 +87,90 @@
     background: white;
     border-left-width: 1px;
   }
+/* The switch - the box around the slider */
 .switch {
-  background: #fff;
-  border: 1px solid #dfdfdf;
   position: relative;
   display: inline-block;
-  box-sizing: content-box;
-  overflow: visible;
-  width: 52px;
-  height: 30px;
-  padding: 0px;
-  margin: 0px;
-  border-radius: 20px;
+  width: 60px;
+  height: 34px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {display:none;}
+
+/* The slider */
+.slider {
+  position: absolute;
   cursor: pointer;
-  box-shadow: rgb(223, 223, 223) 0px 0px 0px 0px inset;
-  transition: 0.3s ease-out all;
-  -webkit-transition: 0.3s ease-out all;
-  top: -1px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
 }
-/*adding a wide width for larger switch text*/
-.switch.wide {
-  width:80px;
-}
-.switch small {
-  background: #fff;
-  border-radius: 100%;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.4);
-  width: 30px;
-  height: 30px;
+
+.slider:before {
   position: absolute;
-  top: 0px;
-  left: 0px;
-  transition: 0.3s ease-out all;
-  -webkit-transition: 0.3s ease-out all;
-}
-.switch.checked {
-  background: rgb(100, 189, 99);
-  border-color: rgb(100, 189, 99);
-}
-.switch.checked small {
-  left: 22px;
-}
-/*wider switch text moves small further to the right*/
-.switch.wide.checked small {
-  left:52px;
-}
-/*styles for switch-text*/
-.switch .switch-text {
-  font-family:Arial, Helvetica, sans-serif;
-  font-size:13px;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
 }
 
-.switch .off {
-  display:block;
-  position: absolute;
-  right: 10%;
-  top: 25%;
-  z-index: 0;
-  color:#A9A9A9;
+input:checked + .slider {
+  background-color: #b3e5fc;
 }
 
-.switch .on {
-  display:none;
-   z-index: 0;
-  color:#fff;
-  position: absolute;
-  top: 25%;
-  left: 9%;
+input:focus + .slider {
+  box-shadow: 0 0 1px #b3e5fc;
 }
 
-.switch.checked .off {
-  display:none;
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
 }
 
-.switch.checked .on {
-  display:block;
-
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
 }
 
-.switch.disabled {
-  opacity: .50;
-  cursor: not-allowed;
+.slider.round:before {
+  border-radius: 50%;
 }
+ .disabled-btn {
+        color: grey !important;
+    }
+    
+    .disabled-kendoCalendarPicker {
+        background: gainsboro !important;
+    }
+    body{
+   
+    font: 13px sans-serif;
+  
+    }
+    .one{
+background: red !important;
+    }
+    .two{
+background: yellow !important;        
+    }
+    .three{
+        background: green !important;        
+    }
+    .k-icon k-i-calendar{
+        color:#b3e5fc !important;      
+    }
+    
+    
 </style>
 
 <body>
